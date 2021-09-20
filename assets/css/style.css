@@ -891,6 +891,7 @@ footer {
     font-size: 1.2rem;
 }
 
+#coming .list-item p,
 #roadmap .list-item p,
 #team .list-item p{    
 padding-left: 0;
