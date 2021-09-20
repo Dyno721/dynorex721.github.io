@@ -384,11 +384,6 @@ section#roadmap {
     margin-bottom: 20px;
 }
 
-#roadmap .list-item p,
-#team .list-item p{
-    padding-left: 5%;
-}
-
 #roadmap .list-item p {    
     font-size: 1.3rem;
 }
@@ -896,10 +891,17 @@ footer {
     font-size: 1.2rem;
 }
 
-#coming .list-item p{    
+#roadmap .list-item p,
+#team .list-item p{    
 padding-left: 0;
 
 }
+
+.dino-icon{
+    width:10%;
+    padding-right:10px ;
+}
+
 .pt-40{
     padding-top: 40px;
 }
