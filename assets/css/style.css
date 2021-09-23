@@ -177,7 +177,15 @@ footer .navbar-nav .nav-link {
 
 .section-title {
     font-weight: 800;
-    font-size: 3rem;
+    font-size: 2.8rem;
+    line-height: 110%;
+    color: #FFFFFF;
+    margin-bottom: 25px;
+}
+
+.section-subtitle {
+    font-weight: 600;
+    font-size: 2rem;
     line-height: 110%;
     color: #FFFFFF;
     margin-bottom: 25px;
@@ -817,6 +825,61 @@ footer {
     padding: 25px 0;
 }
 
+.mb-30{
+    margin-bottom: 30px;
+}
+
+.mb-45{
+    margin-bottom: 45px;
+}
+
+.mint-btns{
+    justify-content: center;
+}
+
+.mint-section{
+    padding-top:250px;
+}
+
+.mint-now {
+    display: flex; 
+    flex-direction: column; 
+    color: white; 
+    font-size: 1.2rem; 
+    font-weight: 500;
+    width:100%; 
+    padding: 1.3rem;
+    margin-bottom: 30px;
+    border: 1px solid #eee;
+}
+
+.mint-now .item {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.item:nth-last-child(1) {
+    padding-bottom: 0;
+  }
+
+.mint-now .qty {
+    height: 2.5rem;
+    text-align: center;
+    color: white;
+    background: #ffffff29;
+    border: none;
+    border-radius: 2px;
+    padding: .5rem 1rem;
+    }
+
+.mint-box{
+    max-width: 800px; 
+    margin: 0 auto; 
+
+}
+
 @media screen and (max-width: 1200px) {
 
     .box-welcome{
@@ -999,6 +1062,9 @@ padding-left: 0;
 }
 
 @media screen and (max-width: 767px) {
+    .section-subtitle{
+        font-size: 1.8rem;
+    }
     .box-welcome{
         position: relative;
         z-index: 0;
@@ -1149,6 +1215,9 @@ padding-left: 0;
 
 
 @media screen and (max-width: 576px) {
+    .section-subtitle{
+        font-size: 1.5rem;
+    }
     .road-item {
         margin-bottom: 15px;
     }
