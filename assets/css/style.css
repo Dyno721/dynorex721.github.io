@@ -1092,7 +1092,8 @@ padding-left: 0;
         object-fit: cover;
     }
 
-    .custom-list{
+    #coming .custom-list,
+    #roadmap .custom-list{
         padding-top: 53px;
     }
 
