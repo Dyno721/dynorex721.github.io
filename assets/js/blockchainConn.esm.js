@@ -567,9 +567,22 @@ function setContract() {
 
 function mintNFT(num) {
     let etherValue = String(0.06*num);
+    let calcGasLimit = 300000;
+    if (num==1){
+        calcGasLimit = 200000;
+    }
+    else if(num==3){
+        calcGasLimit = 400000;
+    }
+    else if(num==4){
+        calcGasLimit = 550000;
+    }
+    else if(num==5){
+        calcGasLimit = 650000;
+    }
     const overrides = {
         value: ethers.utils.parseEther(etherValue),  
-        gasLimit: 300000 //optional
+        gasLimit: calcGasLimit
     };
     _contract.mint(num, overrides).then(() => {
         console.log("Awesome!!! You fucking own this dyno!")
