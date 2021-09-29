@@ -581,10 +581,19 @@ function mintNFT(num) {
         calcGasLimit = 650000;
     }
     else if(num==6){
-        calcGasLimit = 760000;
+        calcGasLimit = 770000;
     }
     else if(num==7){
         calcGasLimit = 900000;
+    }
+    else if(num==8){
+        calcGasLimit = 1050000;
+    }
+    else if(num==9){
+        calcGasLimit = 1150000;
+    }
+    else if(num==10){
+        calcGasLimit = 1260000;
     }
     const overrides = {
         value: ethers.utils.parseEther(etherValue),  
