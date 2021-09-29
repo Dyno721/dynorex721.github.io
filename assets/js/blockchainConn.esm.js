@@ -550,11 +550,12 @@ function connectWallet() {
     console.log("connecting wallet");
     window.ethereum.request({method:'eth_requestAccounts'}).then(() => {
         setProvider();
-        setContract()
+        setContract();
+        checkSupply();
         connectBtn.textContent = "WALLET CONNECTED";
         connectBtn.style.color = "#77ad67";
     }).catch(() => {
-        console.log("It's okay bruh!")
+        console.log("It's okay bruh!");
     });
     console.log("connected wallet");
 }
@@ -600,9 +601,9 @@ function mintNFT(num) {
         gasLimit: calcGasLimit
     };
     _contract.mint(num, overrides).then(() => {
-        console.log("Awesome!!! You fucking own this dyno!")
+        console.log("Awesome!!! You fucking own this dyno!");
     }).catch(() => {
-        console.log("It's okay bruh!")
+        console.log("It's okay bruh!");
     });
 
 }
@@ -610,8 +611,8 @@ function mintNFT(num) {
 
 function checkSupply() {
     _contract.totalSupply().then((supply) => {
-        console.log("Supply right now =", supply)
-        // document.getElementById('supply').textContent = supply+"/100";
+        console.log("Supply right now =", supply);
+        document.getElementById('supply').innerHTML = "Pre-sale is live: <span>" + supply + "</span>/100 Minted";
     });
 }
 
@@ -620,7 +621,8 @@ window.onload = async function() {
     setProvider();
     await isMetaMaskConnected().then((connected) => {
         if (connected) {
-            setContract()
+            setContract();
+            checkSupply();
             connectBtn.textContent = "WALLET CONNECTED";
             connectBtn.style.color = "#77ad67";
 
