@@ -580,6 +580,12 @@ function mintNFT(num) {
     else if(num==5){
         calcGasLimit = 650000;
     }
+    else if(num==6){
+        calcGasLimit = 760000;
+    }
+    else if(num==7){
+        calcGasLimit = 900000;
+    }
     const overrides = {
         value: ethers.utils.parseEther(etherValue),  
         gasLimit: calcGasLimit
@@ -596,6 +602,7 @@ function mintNFT(num) {
 function checkSupply() {
     _contract.totalSupply().then((supply) => {
         console.log("Supply right now =", supply)
+        // document.getElementById('supply').textContent = supply+"/100";
     });
 }
 
