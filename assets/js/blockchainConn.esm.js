@@ -612,7 +612,7 @@ function mintNFT(num) {
 function checkSupply() {
     _contract.totalSupply().then((supply) => {
         console.log("Supply right now =", supply);
-        document.getElementById('supply').innerHTML = "Pre-sale is live: <span>" + supply + "</span>/100 Minted";
+        document.getElementById('supply').innerHTML = "Pre-sale is live: <span>" + supply + "</span>/107 Minted";
     });
 }
 
