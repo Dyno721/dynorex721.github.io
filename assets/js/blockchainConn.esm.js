@@ -567,7 +567,7 @@ function setContract() {
 
 
 function mintNFT(num) {
-    let etherValue = String(0.06*num);
+    let etherValue = String(0.066*num);
     let calcGasLimit = 300000;
     if (num==1){
         calcGasLimit = 200000;
@@ -612,7 +612,7 @@ function mintNFT(num) {
 function checkSupply() {
     _contract.totalSupply().then((supply) => {
         console.log("Supply right now =", supply);
-        document.getElementById('supply').innerHTML = "Pre-sale is live: <span>" + supply + "</span>/107 Minted";
+        document.getElementById('supply').innerHTML = "Final Mint is live: <span>" + supply + "</span>/721 Minted";
     });
 }
 
