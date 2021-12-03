@@ -605,14 +605,13 @@ function mintNFT(num) {
     }).catch(() => {
         console.log("It's okay bruh!");
     });
-
 }
 
 
 function checkSupply() {
     _contract.totalSupply().then((supply) => {
         console.log("Supply right now =", supply);
-        document.getElementById('supply').innerHTML = "Final Mint is live: <span>" + supply + "</span>/721 Minted";
+        // document.getElementById('supply').innerHTML = "Final Mint is live: <span>" + supply + "</span>/721 Minted";
     });
 }
 

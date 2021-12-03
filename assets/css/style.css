@@ -20,6 +20,11 @@ a:focus{
     box-shadow: none;
 }
 
+.specs-mint{
+    width:100% !important;
+    margin-top: -50px;
+}
+
 .site-btn {
     display: -webkit-inline-box;
     display: -ms-inline-flexbox;
@@ -981,6 +986,13 @@ padding-left: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
+
+@media screen and (max-width: 992px){
+    .specs-mint{
+        padding-top: 40px;
+    }
+}
+
 
 @media screen and (max-width: 992px) {
 
