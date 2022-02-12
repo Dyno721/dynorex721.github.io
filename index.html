@@ -16,6 +16,7 @@
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+       
     <link rel="stylesheet" href="assets/css/style.css">
     <script>
         window.addEventListener('keydown', function(e) {
@@ -36,7 +37,37 @@
     gtag('config', 'G-G69TMWY1ZC');
     </script>
     <script type="text/javascript" id="zsiqchat">var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "4a1dfe600a41669b530d579b48793df592f60f7bce9e1fa509a44ef748699cf3", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.in/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);</script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+
+   <style type="text/css">
+        #chart text {
+            fill: rgb(223, 206, 206);
+            text-anchor: end;
+            font-family: "oswald";
+        }
     
+        .axis text {
+            font: 10px sans-serif;
+        }
+    
+        .axis path, .axis line {
+            fill: none;
+            /*stroke: #fff;*/
+            shape-rendering: crispEdges;
+        }
+    
+        body {
+            /*background: #1a1a1a;*/
+            color: #eaeaea;
+          
+        }
+    
+        path {
+            stroke:#eaeaea;
+            stroke-width: 2;
+            fill: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -114,14 +145,13 @@
                         High Utility, Rare Art <span>NFTs</span> for all you gamers out there!
                     </div>
                     <h1 class="section-title mont_font">
-                        Welcome to Dyno
+                        Welcome to DYNO
                     </h1>
                     <div class="section-description mont_font">
                         <p>
                             Dyno is a collection of generative 721 Tyrannosaurus rexes' walking around the blockchain looking for prey with a severe case of the munchies. 
                             All dynos are unique motivated individuals with different dreams, aspirations, and characteristics. 
-                            Each Dyno is also your ticket to the Dyno community, a members only NFT + Crypto community.
-                            Join this ultra-exclusive NFT project featuring not only authentic art, but unmatched utility! 
+                     
                         </p>
                     </div>
                     <div class="header_sc section-controls">
@@ -183,7 +213,7 @@
             </div>
         </div>
     </section>
-    <section >
+    <section>
         <div class="container">
             <div class="row">
                 
@@ -223,7 +253,7 @@
        </div>
     </div>
     </section>
-    <section id="specs" class="section specs-section">
+    <!-- <section id="specs" class="section specs-section">
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-12 col-lg-6 col-md-5 img-box d-flex align-items-center justify-content-center order-md-0 order-2">
@@ -239,6 +269,7 @@
                         <div class="section-title mont_font position-relative">
                             Rarity & Specs
                         </div>
+                        
                         <div class="section-description position-relative mont_font">
                             <p>Dyno is a collection of generative <span class="colored">721 Tyrannosaurus rexes'</span> all unique motivated individuals with different dreams, aspirations, characteristics and over <span class="colored">221 traits</span>. 
                             <p>Some traits are ultra-rare, occuring only once. All Dynos are custom-generated, registered on the Ethereum blockchain, and hosted on IFPS - meaning they can never be altered. </p>
@@ -250,6 +281,30 @@
                 </div>
             </div>
         </div>
+    </section> -->
+
+    <section>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-12 col-lg-12 col-xl-8 offset-xl-2 order-lg-0 order-0">
+                    <div style="text-align: center;">
+                        <br>
+                        <h1 class="section-title mont_font">
+                            Rarity & Specs
+                        </h1>
+                        <div id="chart" style="height:600px;width:600px">
+                            <div class="innerCont" style="overflow: auto; top:100px; left: 400px; height:91% ; Width:100% ;position: relative;overflow: hidden;" />
+                        </div>
+             
+                    </div>
+
+     
+
+       </div>
+
+       </div>
+    </div>
     </section>
 
     <section id="coming" class="section mb-5">
@@ -689,6 +744,327 @@
             }
         };
         </script>
+
+<script src="https://d3js.org/d3.v2.min.js"></script>
+<script type="text/javascript">
+    var salesData;
+    var chartInnerDiv = '<div class="innerCont" style="overflow: auto;top:100px; left: 400px; height:91% ; Width:100% ;position: relative;overflow: hidden;"/>';
+    var truncLengh = 30;
+
+    $(document).ready(function () {
+        Plot();
+    });
+
+    function Plot() {
+        TransformChartData(chartData, chartOptions, 0);
+        BuildPie("chart", chartData, chartOptions, 0)
+    }
+
+    function BuildPie(id, chartData, options, level) {
+        var xVarName;
+        var divisionRatio = 2.5;
+        var legendoffset = (level == 0) ? 0 : -40;
+
+        d3.selectAll("#" + id + " .innerCont").remove();
+        $("#" + id).append(chartInnerDiv);
+        chart = d3.select("#" + id + " .innerCont");
+
+        var yVarName = options[0].yaxis;
+        width = $(chart[0]).outerWidth(),
+        height = $(chart[0]).outerHeight(),
+        radius = Math.min(width, height) / divisionRatio;
+
+        if (level == 1) {
+            xVarName = options[0].xaxisl1;
+        }
+        else {
+            xVarName = options[0].xaxis;
+        }
+
+        var rcolor = d3.scale.ordinal().range(runningColors);
+
+        arc = d3.svg.arc()
+                .outerRadius(radius)
+                .innerRadius(radius - 200);
+
+        var arcOver = d3.svg.arc().outerRadius(radius + 20).innerRadius(radius - 180);
+
+        chart = chart
+                .append("svg")  //append svg element inside #chart
+                .attr("width", width)    //set width
+                .attr("height", height)  //set height
+                .append("g")
+                .attr("transform", "translate(" + (width / divisionRatio) + "," + ((height / divisionRatio) + 30) + ")");
+
+        var pie = d3.layout.pie()
+                    .sort(null)
+                    .value(function (d) {
+                        return d.Total;
+                    });
+
+        var g = chart.selectAll(".arc")
+                    .data(pie(runningData))
+                    .enter().append("g")
+                    .attr("class", "arc");
+
+        var count = 0;
+
+        var path = g.append("path")
+                    .attr("d", arc)
+                    .attr("id", function (d) { return "arc-" + (count++); })
+                    .style("opacity", function (d) {
+                        return d.data["op"];
+                    });
+
+        path.on("mouseenter", function (d) {
+            d3.select(this)
+                .attr("stroke", "white")
+                .transition()
+                .duration(200)
+                .attr("d", arcOver)
+                .attr("stroke-width", 1);
+        })
+         .on("mouseleave", function (d) {
+             d3.select(this).transition()
+                 .duration(200)
+                 .attr("d", arc)
+                 .attr("stroke", "none");
+         })
+         .on("click", function (d) {
+             if (this._listenToEvents) {
+                 // Reset inmediatelly
+                 d3.select(this).attr("transform", "translate(0,0)")
+                 // Change level on click if no transition has started
+                 path.each(function () {
+                     this._listenToEvents = false;
+                 });
+             }
+             d3.selectAll("#" + id + " svg").remove();
+             if (level == 1) {
+                 TransformChartData(chartData, options, 0, d.data[xVarName]);
+                 BuildPie(id, chartData, options, 0);
+             }
+             else {
+                 var nonSortedChart = chartData.sort(function (a, b) {
+                     return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+                 });
+                 TransformChartData(nonSortedChart, options, 1, d.data[xVarName]);
+                 BuildPie(id, nonSortedChart, options, 1);
+             }
+
+         });
+
+        path.append("svg:title")
+        .text(function (d) {
+            return d.data["title"] + " (" + d.data[yVarName] + ")";
+        });
+
+        path.style("fill", function (d) {
+            return rcolor(d.data[xVarName]);
+        })
+         .transition().duration(1000).attrTween("d", tweenIn).each("end", function () {
+             this._listenToEvents = true;
+         });
+
+
+        g.append("text")
+         .attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })
+         .attr("dy", ".35em")
+         .style("text-anchor", "middle")
+         .style("opacity", 1)
+         .text(function (d) {
+             return d.data[yVarName];
+         });
+
+        count = 0;
+        var legend = chart.selectAll(".legend")
+            .data(runningData).enter()
+            .append("g").attr("class", "legend")
+            .attr("legend-id", function (d) {
+                return count++;
+            })
+            .attr("transform", function (d, i) {
+                return "translate(30," + (parseInt("-" + (runningData.length * 10)) + i * 28 + legendoffset) + ")";
+            })
+            .style("cursor", "pointer")
+            .on("click", function () {
+                var oarc = d3.select("#" + id + " #arc-" + $(this).attr("legend-id"));
+                oarc.style("opacity", 0.3)
+                .attr("stroke", "white")
+                .transition()
+                .duration(200)
+                .attr("d", arcOver)
+                .attr("stroke-width", 1);
+                setTimeout(function () {
+                    oarc.style("opacity", function (d) {
+                        return d.data["op"];
+                    })
+                   .attr("d", arc)
+                   .transition()
+                   .duration(200)
+                   .attr("stroke", "none");
+                }, 1000);
+            });
+
+        var leg = legend.append("rect");
+
+        leg.attr("x", width / 2)
+            .attr("width", 20).attr("height", 20)
+            .style("fill", function (d) {
+                return rcolor(d[yVarName]);
+            })
+            .style("opacity", function (d) {
+                return d["op"];
+            });
+        legend.append("text").attr("x", (width / 2) - 5)
+            .attr("y", 9).attr("dy", ".45em")
+            .style("text-anchor", "end").text(function (d) {
+                return d.caption;
+            });
+
+        leg.append("svg:title")
+        .text(function (d) {
+            return d["title"] + " (" + d[yVarName] + ")";
+        });
+
+        function tweenOut(data) {
+            data.startAngle = data.endAngle = (2 * Math.PI);
+            var interpolation = d3.interpolate(this._current, data);
+            this._current = interpolation(0);
+            return function (t) {
+                return arc(interpolation(t));
+            };
+        }
+
+        function tweenIn(data) {
+            var interpolation = d3.interpolate({ startAngle: 0, endAngle: 0 }, data);
+            this._current = interpolation(0);
+            return function (t) {
+                return arc(interpolation(t));
+            };
+        }
+
+    }
+
+    function TransformChartData(chartData, opts, level, filter) {
+        var result = [];
+        var resultColors = [];
+        var counter = 0;
+        var hasMatch;
+        var xVarName;
+        var yVarName = opts[0].yaxis;
+
+        if (level == 1) {
+            xVarName = opts[0].xaxisl1;
+
+            for (var i in chartData) {
+                hasMatch = false;
+                for (var index = 0; index < result.length; ++index) {
+                    var data = result[index];
+
+                    if ((data[xVarName] == chartData[i][xVarName]) && (chartData[i][opts[0].xaxis]) == filter) {
+                        result[index][yVarName] = result[index][yVarName] + chartData[i][yVarName];
+                        hasMatch = true;
+                        break;
+                    }
+
+                }
+                if ((hasMatch == false) && ((chartData[i][opts[0].xaxis]) == filter)) {
+                    if (result.length < 9) {
+                        ditem = {}
+                        ditem[xVarName] = chartData[i][xVarName];
+                        ditem[yVarName] = chartData[i][yVarName];
+                        ditem["caption"] = chartData[i][xVarName];
+                        ditem["title"] = chartData[i][xVarName];
+                        ditem["op"] = 1.0 - parseFloat("0." + (result.length));
+                        result.push(ditem);
+
+                        resultColors[counter] = opts[0].color[0][chartData[i][opts[0].xaxis]];
+
+                        counter += 1;
+                    }
+                }
+            }
+        }
+        else {
+            xVarName = opts[0].xaxis;
+
+            for (var i in chartData) {
+                hasMatch = false;
+                for (var index = 0; index < result.length; ++index) {
+                    var data = result[index];
+
+                    if (data[xVarName] == chartData[i][xVarName]) {
+                        result[index][yVarName] = result[index][yVarName] + chartData[i][yVarName];
+                        hasMatch = true;
+                        break;
+                    }
+                }
+                if (hasMatch == false) {
+                    ditem = {};
+                    ditem[xVarName] = chartData[i][xVarName];
+                    ditem[yVarName] = chartData[i][yVarName];
+                    ditem["caption"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
+                    ditem["title"] = opts[0].captions != undefined ? opts[0].captions[0][chartData[i][xVarName]] : "";
+                    ditem["op"] = 1;
+                    result.push(ditem);
+
+                    resultColors[counter] = opts[0].color != undefined ? opts[0].color[0][chartData[i][xVarName]] : "";
+
+                    counter += 1;
+                }
+            }
+        }
+
+
+        runningData = result;
+        runningColors = resultColors;
+        return;
+    }
+
+    chartOptions = [{
+        "captions": [{ "Generative": "Generative", "1:1s": "1:1s" }],
+        "color": [{ "Generative": "#7F055F", "1:1s": "#DB5A42" }],
+        "xaxis": "Country",
+        "xaxisl1": "Model",
+        "yaxis": "Total"
+    }]
+
+    var chartData = [
+ 
+        {
+            "Country": "1:1s",
+            "Model": "1:1s",
+            "Total": 55
+        },
+        {
+            "Country": "Generative",
+            "Model": "Doesn't exist",
+            "Total": 20
+        },
+        {
+            "Country": "Generative",
+            "Model": "Chad",
+            "Total": 47
+        },
+        {
+            "Country": "Generative",
+            "Model": "Giga Rare",
+            "Total": 99
+        },
+        {
+            "Country": "Generative",
+            "Model": "Super Rare",
+            "Total": 167
+        },
+        {
+            "Country": "Generative",
+            "Model": "Rare",
+            "Total": 333
+        }
+    ];
+
+</script>
 
 <!-- <script src="assets/js/main.js?v=1631693798"></script> -->
 </body>
