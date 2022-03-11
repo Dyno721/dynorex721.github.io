@@ -1864,6 +1864,7 @@
         this.currentDistance = 0;
         this.maxScore = 0;
         this.highScore = 0;
+        this.score = 0;
         this.container = null;
 
         this.digits = [];
@@ -2091,7 +2092,7 @@
             distance = this.getActualDistance(distance);
             var highScoreStr = (this.defaultString +
                 distance).substr(-this.maxScoreUnits);
-
+            this.score = distance;
             this.highScore = ['10', '11', ''].concat(highScoreStr.split(''));
         },
 
@@ -2706,6 +2707,10 @@
         }
     };
 })();
+
+function getHighScore(){
+    return Runner.instance_.distanceMeter.score;
+}
 
 
 function onDocumentLoad() {
